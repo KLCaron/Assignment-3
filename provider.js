@@ -7,7 +7,7 @@ module.exports = {
         return paintingsData;
     },
     getPaintingsById: (id) => {
-        const foundPainting = paintingsData.find((painting) => painting.ID == id);
+        const foundPainting = paintingsData.find((painting) => painting.paintingID == id);
         if (!foundPainting) {
             return {message: "No paintings found"};
         } else {
@@ -15,7 +15,7 @@ module.exports = {
         }
     },
     getPaintingsByGalleryId: (galleryId) => {
-        const foundPaintings = paintingsData.filter((painting) => painting.galleryId == galleryId);
+        const foundPaintings = paintingsData.filter((painting) => painting.gallery.galleryID == galleryId);
         if (foundPaintings.length == 0) {
             return {message: "No paintings found"};
         } else {
@@ -23,7 +23,7 @@ module.exports = {
         }
     },
     getPaintingsByArtistId: (artistId) => {
-        const foundPaintings = paintingsData.filter((painting) => painting.artistId == artistId);
+        const foundPaintings = paintingsData.filter((painting) => painting.artist.artistID == artistId);
         if (foundPaintings.length == 0) {
             return {message: "No paintings found"};
         } else {
@@ -55,7 +55,7 @@ module.exports = {
     },
     getPaintingsByColor: (color) => {
         const containsColor = (painting, searchColor) => {
-            return painting.dominantColors.some(color => color.name.toLowerCase() 
+            return painting.details.annotation.dominantColors.some(color => color.name.toLowerCase() 
                 == searchColor.toLowerCase());
         };
         const foundPaintings = paintingsData.filter((painting) => 
@@ -71,7 +71,7 @@ module.exports = {
     },
     getArtistsByCountry: (country) => {
         const foundArtists = artistsData.filter((artist) =>
-            artist.country.toLowerCase() == country.toLowerCase()
+            artist.Nationality.toLowerCase() == country.toLowerCase()
         );
         if (foundArtists.length == 0) {
             return {message: "No artists found"};
@@ -84,7 +84,7 @@ module.exports = {
     },
     getGalleriesByCountry: (country) => {
         const foundGalleries = galleriesData.filter((gallery) => 
-            gallery.country.toLowerCase() == country.toLowerCase()
+            gallery.GalleryCountry.toLowerCase() == country.toLowerCase()
         );
         if (foundGalleries.length == 0) {
             return {message: "No galleries found"};
