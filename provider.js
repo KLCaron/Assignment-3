@@ -7,51 +7,89 @@ module.exports = {
         return paintingsData;
     },
     getPaintingsById: (id) => {
-        return paintingsData.find((painting) => painting.ID == id);
+        const foundPainting = paintingsData.find((painting) => painting.ID == id);
+        if (!foundPainting) {
+            return {message: "No paintings found"};
+        } else {
+            return foundPainting;
+        }
     },
     getPaintingsByGalleryId: (galleryId) => {
-        return paintingsData.filter((painting) => painting.galleryId == galleryId);
+        const foundPaintings = paintingsData.filter((painting) => painting.galleryId == galleryId);
+        if (foundPaintings.length == 0) {
+            return {message: "No paintings found"};
+        } else {
+            return foundPaintings;
+        }
     },
     getPaintingsByArtistId: (artistId) => {
-        return paintingsData.filter((painting) => painting.artistId == artistId);
+        const foundPaintings = paintingsData.filter((painting) => painting.artistId == artistId);
+        if (foundPaintings.length == 0) {
+            return {message: "No paintings found"};
+        } else {
+            return foundPaintings;
+        }
     },
     getPaintingsByYearRange: (minYear, maxYear) => {
-        return paintingsData.filter (
+        const foundPaintings = paintingsData.filter (
             (painting) => painting.yearOfWork >= minYear && painting.yearOfWork <= maxYear
         );
+        if (foundPaintings.length == 0) {
+            return {message: "No paintings found"};
+        } else {
+            return foundPaintings;
+        }
     },
     getPaintingsByText: (text) => {
         const containsText = (title, searchText) => {
             return title.toLowerCase().includes(searchText.toLowerCase());
         };
-
-        return paintingsData.filter((painting) => 
+        const foundPaintings = paintingsData.filter((painting) => 
             containsText(painting.title, text)
         );
+        if (foundPaintings.length == 0) {
+            return {message: "No paintings found"};
+        } else {
+            return foundPaintings;
+        }
     },
     getPaintingsByColor: (color) => {
         const containsColor = (painting, searchColor) => {
             return painting.dominantColors.some(color => color.name.toLowerCase() 
                 == searchColor.toLowerCase());
         };
-
-        return paintingsData.filter((painting) => 
+        const foundPaintings = paintingsData.filter((painting) => 
             containsColor(painting, color));
+        if (foundPaintings.length == 0) {
+            return {message: "No paintings found"};
+        } else {
+            return foundPaintings;
+        }
     },
     getAllArtists: () => {
         return artistsData;
     },
     getArtistsByCountry: (country) => {
-        return artistsData.filter((artist) =>
+        const foundArtists = artistsData.filter((artist) =>
             artist.country.toLowerCase() == country.toLowerCase()
         );
+        if (foundArtists.length == 0) {
+            return {message: "No artists found"};
+        } else {
+            return foundArtists;
+        }
     },
     getAllGalleries: () => {
         return galleriesData;
     },
     getGalleriesByCountry: (country) => {
-        return galleriesData.filter((gallery) => 
+        const foundGalleries = galleriesData.filter((gallery) => 
             gallery.country.toLowerCase() == country.toLowerCase()
         );
+        if (foundGalleries.length == 0) {
+            return {message: "No galleries found"};
+        } else {
+            return foundGalleries;
+        }
     }
 };
