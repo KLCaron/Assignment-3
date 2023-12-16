@@ -49,7 +49,7 @@ app.get('/api/painting/year/:min/:max', (req, res) => {
 });
 
 app.get('/api/painting/title/:text', (req, res) => {
-    const title = req.params.title;
+    const title = req.params.text;
     const paintings = provider.getPaintingsByText(title);
     if (paintings.message) {
         res.status(404).json(paintings);
@@ -59,7 +59,7 @@ app.get('/api/painting/title/:text', (req, res) => {
 });
 
 app.get('/api/painting/color/:name', (req, res) => {
-    const color = req.params.color;
+    const color = req.params.name;
     const paintings = provider.getPaintingsByColor(color);
     if (paintings.message) {
         res.status(404).json(paintings);
@@ -96,4 +96,9 @@ app.get('/api/galleries/:country', (req, res) => {
     } else {
         res.json(galleries);
     }
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server port is ${PORT}`);
 });
